@@ -19,14 +19,14 @@ import java.net.Socket;
 
 public class TcpClient {
 
-    public final String SERVER_IP; //your computer IP address
+    public final String SERVER_IP = "192.168.1.10"; //your computer IP address
     public static final int SERVER_PORT = 5003;
 
     /**
      * Constructor of the class. OnMessagedReceived listens for the messages received from server
      */
-    public TcpClient(String server_ip) {
-        SERVER_IP = server_ip;
+    public TcpClient() {
+
     }
 
     /**
@@ -49,32 +49,32 @@ public class TcpClient {
         protected Void doInBackground(String... params) {
 
             try {
-                //here you must put your computer's IP address.
-                InetAddress serverAddr = InetAddress.getByName(SERVER_IP);
 
-                Log.e("TCP Client", "C: Connecting...");
+                    //here you must put your computer's IP address.
+                    InetAddress serverAddr = InetAddress.getByName(SERVER_IP);
 
-                //create a socket to make the connection with the server
-                Socket socket = new Socket(serverAddr, SERVER_PORT);
+                    Log.e("TCP Client", "C: Connecting...");
 
-                try {
+                    //create a socket to make the connection with the server
+                    Socket socket = new Socket(serverAddr, SERVER_PORT);
 
-                    //sends the message to the server
-                    PrintWriter mBufferOut = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
+                    try {
 
-                    mBufferOut.print(params[0]);
-                    mBufferOut.flush();
+                        //sends the message to the server
+                        PrintWriter mBufferOut = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 
-                } catch (Exception e) {
+                        mBufferOut.print(params[0]);
+                        mBufferOut.flush();
 
-                    Log.e("TCP", "S: Error", e);
+                    } catch (Exception e) {
 
-                } finally {
-                    //the socket must be closed. It is not possible to reconnect to this socket
-                    // after it is closed, which means a new socket instance has to be created.
-                    socket.close();
-                }
+                        Log.e("TCP", "S: Error", e);
 
+                    } finally {
+                        //the socket must be closed. It is not possible to reconnect to this socket
+                        // after it is closed, which means a new socket instance has to be created.
+                        socket.close();
+                    }
             } catch (Exception e) {
 
                 Log.e("TCP", "C: Error", e);

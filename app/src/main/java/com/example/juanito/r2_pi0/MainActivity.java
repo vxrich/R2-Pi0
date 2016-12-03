@@ -1,6 +1,7 @@
 package com.example.juanito.r2_pi0;
 
 import android.app.Activity;
+import android.content.Context;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -22,42 +23,14 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-          setContentView(R.layout.activity_main);
+        Context context = getApplicationContext();
 
-        Toast.makeText(getApplicationContext(), "Sono vivo 1", Toast.LENGTH_SHORT).show();
+        setContentView(R.layout.activity_main);
 
-        AsyncTask<Void, Void, List<InetAddress>> at = (new DiscoveryClient(5000, 5001).execute());
+        //WiFiConnection.connection(context);
 
-        InetAddress addr = null;
 
-        Toast.makeText(getApplicationContext(), "Sono vivo 2", Toast.LENGTH_SHORT).show();
 
-        try {
-            List<InetAddress> lista_at = at.get();
-             if (lista_at.size() > 0)
-             {
-                addr = lista_at.get(0);
-             }
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
-        TcpClient tcpClient = null;
-
-        Toast.makeText(getApplicationContext(), "Sono vivo 3", Toast.LENGTH_SHORT).show();
-
-        if (addr!= null)
-        {
-            tcpClient = new TcpClient(addr.toString());
-        }
-        else
-        {
-            Toast toast = Toast.makeText(getApplicationContext(), "Impossibile connettersi", Toast.LENGTH_SHORT);
-            toast.show();
-        }
         ImageButton forward = (ImageButton) findViewById(R.id.forward);
         ImageButton stop = (ImageButton) findViewById(R.id.stop);
         ImageButton left = (ImageButton) findViewById(R.id.left);
@@ -65,68 +38,53 @@ public class MainActivity extends AppCompatActivity{
         ImageButton shutdown = (ImageButton) findViewById(R.id.shutdown);
         ImageButton music = (ImageButton) findViewById(R.id.music);
 
-        final TcpClient mTcpClient = tcpClient;
+            final TcpClient  mTcpClient = new TcpClient();
 
-
-
-        forward.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                if (mTcpClient != null) {
-                    mTcpClient.sendMessage("avanti");
+            forward.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    if (mTcpClient != null) {
+                        mTcpClient.sendMessage("forward");
+                    }
                 }
-            }
-        });
+            });
 
-        stop.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                if (mTcpClient != null) {
-                    mTcpClient.sendMessage("stop");
+            stop.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    if (mTcpClient != null) {
+                        mTcpClient.sendMessage("stop");
+                    }
                 }
-            }
-        });
+            });
 
-        left.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                if (mTcpClient != null) {
-                    mTcpClient.sendMessage("left");
+            left.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    if (mTcpClient != null) {
+                        mTcpClient.sendMessage("left");
+                    }
                 }
-            }
-        });
+            });
 
-        right.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                if (mTcpClient != null) {
-                    mTcpClient.sendMessage("right");
+            right.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    if (mTcpClient != null) {
+                        mTcpClient.sendMessage("right");
+                    }
                 }
-            }
-        });
+            });
 
-        shutdown.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                if (mTcpClient != null) {
-                    mTcpClient.sendMessage("shutdown");
+            shutdown.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    if (mTcpClient != null) {
+                        mTcpClient.sendMessage("shutdown");
+                    }
                 }
-            }
-        });
+            });
 
-        music.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                if (mTcpClient != null) {
-                    mTcpClient.sendMessage("music");
+            music.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    if (mTcpClient != null) {
+                        mTcpClient.sendMessage("music");
+                    }
                 }
-            }
-        });
-
+            });
 }}
