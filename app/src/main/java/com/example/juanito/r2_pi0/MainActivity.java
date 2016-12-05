@@ -24,11 +24,38 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
 
         Context context = getApplicationContext();
-
+        //WiFiConnection.connection(context);
         setContentView(R.layout.activity_main);
 
-        //WiFiConnection.connection(context);
+        AsyncTask<Void, Void, List<InetAddress>> at = (new DiscoveryClient(5000, 5001).execute());
 
+        InetAddress addr = null;
+
+        try {
+            List<InetAddress> lista_at = at.get();
+            if (lista_at.size() > 0)
+            {
+                addr = lista_at.get(0);
+            }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        TcpClient tcpClient = null;
+
+
+        if (addr!= null)
+        {
+            tcpClient = new TcpClient(addr.toString());
+        }
+        else
+        {
+            Toast toast = Toast.makeText(getApplicationContext(), "Impossibile connettersi", Toast.LENGTH_SHORT);
+            toast.show();
+        }
 
 
         ImageButton forward = (ImageButton) findViewById(R.id.forward);
@@ -38,7 +65,7 @@ public class MainActivity extends AppCompatActivity{
         ImageButton shutdown = (ImageButton) findViewById(R.id.shutdown);
         ImageButton music = (ImageButton) findViewById(R.id.music);
 
-            final TcpClient  mTcpClient = new TcpClient();
+        final TcpClient mTcpClient = tcpClient;
 
             forward.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {

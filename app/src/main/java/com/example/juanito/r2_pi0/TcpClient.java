@@ -19,14 +19,15 @@ import java.net.Socket;
 
 public class TcpClient {
 
-    public final String SERVER_IP = "192.168.1.10"; //your computer IP address
+    public final String SERVER_IP; //your computer IP address
     public static final int SERVER_PORT = 5003;
 
     /**
      * Constructor of the class. OnMessagedReceived listens for the messages received from server
      */
-    public TcpClient() {
-
+    public TcpClient(String server_ip)
+    {
+        SERVER_IP = server_ip;
     }
 
     /**
