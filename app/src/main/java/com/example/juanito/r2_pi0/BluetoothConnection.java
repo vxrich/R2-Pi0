@@ -44,6 +44,7 @@ public class BluetoothConnection extends ActivityCompat {
             }
         }
 
+        
     }
 
         public void write(String s) throws IOException {
