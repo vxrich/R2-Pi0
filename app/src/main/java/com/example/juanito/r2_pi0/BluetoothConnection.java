@@ -7,6 +7,7 @@ package com.example.juanito.r2_pi0;
 import android.bluetooth.*;
 import android.content.Intent;
 import android.os.ParcelUuid;
+import android.support.v4.app.ActivityCompat;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +16,7 @@ import java.util.Set;
 
 import static android.support.v4.app.ActivityCompat.startActivityForResult;
 
-public class BluetoothConnection {
+public class BluetoothConnection extends ActivityCompat {
 
     private OutputStream outputStream;
     private InputStream inputStream;
@@ -29,26 +30,20 @@ public class BluetoothConnection {
 
         if (!mBluetoothAdapter.isEnabled()) {
             Intent turnOn = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(turnOn, 0);
-        } else {
-            Set<BluetoothDevice> bondedDevices = mBluetoothAdapter.getBondedDevices();
+            Integer REQUEST_ENABLE_BT = 0;
+            startActivityForResult(turnOn, REQUEST_ENABLE_BT);
+        }
 
-            if (bondedDevices.size() > 0) {
-                Object[] devices = (Object[]) bondedDevices.toArray();
-                BluetoothDevice device = (BluetoothDevice) devices[position];
-                ParcelUuid[] uuids = device.getUuids();
-                BluetoothSocket socket = null;
-                try {
-                    socket = device.createRfcommSocketToServiceRecord(uuids[0].getUuid());
-                    socket.connect();
-                    outputStream = socket.getOutputStream();
-                    inputStream = socket.getInputStream();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                };
+        Set<BluetoothDevice> bondedDevices = mBluetoothAdapter.getBondedDevices();
 
+        if (bondedDevices.size() > 0) {
+
+            for(BluetoothDevice device: bondedDevices){
+                String deviceName = device.getName();
+                String deviceHardwareAddress = device.getAddress();
             }
         }
+
     }
 
         public void write(String s) throws IOException {
