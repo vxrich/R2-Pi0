@@ -56,4 +56,13 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="49dp" />
 
+    <ImageButton
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/bluetooth"
+        android:id="@+id/bluetooth"
+        android:background="@drawable/round_shape"
+        android:layout_alignTop="@+id/vocal_control"
+        android:layout_alignStart="@+id/shutdown" />
+
 </RelativeLayout>

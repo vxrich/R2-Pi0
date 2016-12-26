@@ -2,6 +2,7 @@ package com.example.juanito.r2_pi0;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +16,15 @@ import android.widget.Toast;
 import android.bluetooth.*;
 import java.net.InetAddress;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
+import static android.support.v4.app.ActivityCompat.startActivityForResult;
+
 public class MainActivity extends AppCompatActivity{
+
+
+    private static final int REQUEST_ENABLE_BT = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +67,30 @@ public class MainActivity extends AppCompatActivity{
         final TcpClient mTcpClient = tcpClient;
         */
 
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBluetoothAdapter == null) {
+            // Device does not support Bluetooth
+        }
+
+        if (!mBluetoothAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }
+
+        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+
+        if (pairedDevices.size() > 0) {
+            // There are paired devices. Get the name and address of each paired device.
+            for (BluetoothDevice device : pairedDevices) {
+                String deviceName = device.getName();
+                String deviceHardwareAddress = device.getAddress(); // MAC address
+            }
+        }
+
         JoyStick joystick = (JoyStick) findViewById(R.id.joy);
         ImageButton shutdown = (ImageButton) findViewById(R.id.shutdown);
         ImageButton music = (ImageButton) findViewById(R.id.music);
+        ImageButton bluetooth = (ImageButton) findViewById(R.id.bluetooth);
 
 
             shutdown.setOnClickListener(new View.OnClickListener() {
@@ -80,4 +108,38 @@ public class MainActivity extends AppCompatActivity{
                     }*/
                 }
             });
-}}
+
+            bluetooth.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View v){
+                    //Apre l'activity con la lista dei device associati e trovati
+                    bluetoothConnection();
+                }
+            });
+    }
+
+    private void bluetoothConnection(){
+
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBluetoothAdapter == null) {
+            // Device does not support Bluetooth
+        }
+
+        if (!mBluetoothAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }
+
+        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+
+        if (pairedDevices.size() > 0) {
+            // There are paired devices. Get the name and address of each paired device.
+            for (BluetoothDevice device : pairedDevices) {
+                String deviceName = device.getName();
+                String deviceHardwareAddress = device.getAddress(); // MAC address
+            }
+        }
+
+    }
+
+
+}
