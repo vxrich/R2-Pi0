@@ -23,6 +23,8 @@ import static android.support.v4.app.ActivityCompat.startActivityForResult;
 
 public class MainActivity extends AppCompatActivity{
 
+    BluetoothConnection bluetooth = new BluetoothConnection();
+
 
     private static final int REQUEST_ENABLE_BT = 0;
 
@@ -67,31 +69,12 @@ public class MainActivity extends AppCompatActivity{
         final TcpClient mTcpClient = tcpClient;
         */
 
-        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (mBluetoothAdapter == null) {
-            // Device does not support Bluetooth
-        }
 
-        if (!mBluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        }
-
-        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
-
-        if (pairedDevices.size() > 0) {
-            // There are paired devices. Get the name and address of each paired device.
-            for (BluetoothDevice device : pairedDevices) {
-                String deviceName = device.getName();
-                String deviceHardwareAddress = device.getAddress(); // MAC address
-            }
-        }
 
         JoyStick joystick = (JoyStick) findViewById(R.id.joy);
         ImageButton shutdown = (ImageButton) findViewById(R.id.shutdown);
         ImageButton music = (ImageButton) findViewById(R.id.music);
         ImageButton bluetooth = (ImageButton) findViewById(R.id.bluetooth);
-
 
             shutdown.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -112,7 +95,7 @@ public class MainActivity extends AppCompatActivity{
             bluetooth.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
                     //Apre l'activity con la lista dei device associati e trovati
-                    bluetoothConnection();
+                    bluetooth.connection();
                 }
             });
     }

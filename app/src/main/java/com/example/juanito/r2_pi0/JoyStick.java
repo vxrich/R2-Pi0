@@ -1,231 +1,270 @@
 package com.example.juanito.r2_pi0;
 
-/**
- * Created by edgarramirez on 10/30/15.
- */
-
-/*
-    Copyright 2015 erz05
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-     http://www.apache.org/licenses/LICENSE-2.0
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
- */
-
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+public class JoystickView extends View implements Runnable {
+    // Constants
+    private final double RAD = 57.2957795;
+    public final static long DEFAULT_LOOP_INTERVAL = 100; // 100 ms
+    public final static int ALPHA = 180;
+    public final static int FRONT = 3;
+    public final static int FRONT_RIGHT = 4;
+    public final static int RIGHT = 5;
+    public final static int RIGHT_BOTTOM = 6;
+    public final static int BOTTOM = 7;
+    public final static int BOTTOM_LEFT = 8;
+    public final static int LEFT = 1;
+    public final static int LEFT_FRONT = 2;
+    // Variables
+    private OnJoystickMoveListener onJoystickMoveListener; // Listener
+    private Thread thread = new Thread(this);
+    private long loopInterval = DEFAULT_LOOP_INTERVAL;
+    private int xPosition = 0; // Touch x position
+    private int yPosition = 0; // Touch y position
+    private double centerX = 0; // Center view x position
+    private double centerY = 0; // Center view y position
+    private Paint mainCircle;
+    private Paint secondaryCircle;
+    private Paint button;
+    private Paint horizontalLine;
+    private Paint verticalLine;
+    private int joystickRadius;
+    private int buttonRadius;
+    private int lastAngle = 0;
+    private int lastPower = 0;
 
-public class JoyStick extends View {
-
-    private JoyStickListener listener;
-    private Paint paint;
-    private float centerX;
-    private float centerY;
-    private float posX;
-    private float posY;
-    private float radius;
-    private float buttonRadius;
-    private double power = -1;
-    private double angle = -1;
-    private RectF temp;
-
-    //Background Color
-    private int padColor;
-
-    //Stick Color
-    private int buttonColor;
-
-    //Keeps joystick in last position
-    private boolean stayPut;
-
-    //Button Size percentage of the minimum(width, height)
-    private int percentage = 25;
-
-    //Background Bitmap
-    private Bitmap padBGBitmap = null;
-
-    //Button Bitmap
-    private Bitmap buttonBitmap = null;
-
-    public interface JoyStickListener {
-        void onMove(JoyStick joyStick, double angle, double power);
-    }
-
-    public JoyStick(Context context) {
+    public JoystickView(Context context) {
         super(context);
-        init(context, null);
     }
 
-    public JoyStick(Context context, AttributeSet attrs) {
+    public JoystickView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs);
+        initJoystickView();
     }
 
-    private void init(Context context, AttributeSet attrs) {
-        paint = new Paint();
-        paint.setStyle(Paint.Style.FILL);
-        paint.setAntiAlias(true);
+    public JoystickView(Context context, AttributeSet attrs, int defaultStyle) {
+        super(context, attrs, defaultStyle);
+        initJoystickView();
+    }
 
-        temp = new RectF();
+    protected void initJoystickView() {
+        mainCircle = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mainCircle.setColor(Color.argb(ALPHA, 180, 180, 180));
+        mainCircle.setStyle(Paint.Style.FILL_AND_STROKE);
 
-        padColor = Color.WHITE;
-        buttonColor = Color.RED;
+        secondaryCircle = new Paint();
+        secondaryCircle.setStrokeWidth(5);
+        secondaryCircle.setColor(Color.argb(ALPHA, 210, 210, 210));
+        secondaryCircle.setStyle(Paint.Style.STROKE);
 
-        if (attrs != null) {
-            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.JoyStick);
-            if (typedArray != null) {
-                padColor = typedArray.getColor(R.styleable.JoyStick_padColor, Color.WHITE);
-                buttonColor = typedArray.getColor(R.styleable.JoyStick_buttonColor, Color.RED);
-                stayPut = typedArray.getBoolean(R.styleable.JoyStick_stayPut, false);
-                percentage = typedArray.getInt(R.styleable.JoyStick_percentage, 25);
-                if (percentage > 50) percentage = 50;
-                if (percentage < 25) percentage = 25;
+        verticalLine = new Paint();
+        verticalLine.setStrokeWidth(5);
+        verticalLine.setColor(Color.argb(ALPHA, 200, 200, 200));
 
-                int padResId = typedArray.getResourceId(R.styleable.JoyStick_backgroundDrawable, -1);
-                int buttonResId = typedArray.getResourceId(R.styleable.JoyStick_buttonDrawable, -1);
+        horizontalLine = new Paint();
+        horizontalLine.setStrokeWidth(5);
+        horizontalLine.setColor(Color.argb(ALPHA, 200, 200, 200));
 
-                if (padResId > 0) {
-                    padBGBitmap = BitmapFactory.decodeResource(getResources(), padResId);
-                }
-                if (buttonResId > 0) {
-                    buttonBitmap = BitmapFactory.decodeResource(getResources(), buttonResId);
-                }
+        button = new Paint(Paint.ANTI_ALIAS_FLAG);
+        button.setColor(Color.argb(255, 100, 100, 100));
+        button.setStyle(Paint.Style.FILL);
+    }
 
-                typedArray.recycle();
-            }
-        }
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+    }
+
+    @Override
+    protected void onSizeChanged(int xNew, int yNew, int xOld, int yOld) {
+        super.onSizeChanged(xNew, yNew, xOld, yOld);
+        // before measure, get the center of view
+        xPosition = (int) getWidth() / 2;
+        yPosition = (int) getWidth() / 2;
+        int d = Math.min(xNew, yNew);
+        buttonRadius = (int) (d / 2 * 0.25);
+        joystickRadius = (int) (d / 2 * 0.75);
+
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        float width = MeasureSpec.getSize(widthMeasureSpec);
-        float height = MeasureSpec.getSize(heightMeasureSpec);
-        centerX = width / 2;
-        centerY = height / 2;
-        float min = Math.min(width, height);
-        posX = centerX;
-        posY = centerY;
-        buttonRadius = (min / 2f * (percentage / 100f));
-        radius = (min / 2f * ((100f - percentage) / 100f));
+        // setting the measured values to resize the view to a certain width and
+        // height
+        int d = Math.min(measure(widthMeasureSpec), measure(heightMeasureSpec));
+
+        setMeasuredDimension(d, d);
+
+    }
+
+    private int measure(int measureSpec) {
+        int result = 0;
+
+        // Decode the measurement specifications.
+        int specMode = MeasureSpec.getMode(measureSpec);
+        int specSize = MeasureSpec.getSize(measureSpec);
+
+        if (specMode == MeasureSpec.UNSPECIFIED) {
+            // Return a default size of 200 if no bounds are specified.
+            result = 200;
+        } else {
+            // As you want to fill the available space
+            // always return the full available bounds.
+            result = specSize;
+        }
+        return result;
     }
 
     @Override
-    public void draw(Canvas canvas) {
-        super.draw(canvas);
-        if (canvas == null) return;
-        if (padBGBitmap == null) {
-            paint.setColor(padColor);
-            canvas.drawCircle(centerX, centerY, radius, paint);
-        } else {
-            temp.set(centerX - radius, centerY - radius, centerX + radius, centerY + radius);
-            canvas.drawBitmap(padBGBitmap, null, temp, paint);
-        }
-        if (buttonBitmap == null) {
-            paint.setColor(buttonColor);
-            canvas.drawCircle(posX, posY, buttonRadius, paint);
-        } else {
-            temp.set(posX - buttonRadius, posY - buttonRadius, posX + buttonRadius, posY + buttonRadius);
-            canvas.drawBitmap(buttonBitmap, null, temp, paint);
-        }
+    protected void onDraw(Canvas canvas) {
+        // super.onDraw(canvas);
+        centerX = (getWidth()) / 2;
+        centerY = (getHeight()) / 2;
+
+        // painting the main circle
+        canvas.drawCircle((int) centerX, (int) centerY, joystickRadius,
+                mainCircle);
+        // painting the secondary circle
+        canvas.drawCircle((int) centerX, (int) centerY, joystickRadius / 2,
+                secondaryCircle);
+        // paint lines
+        canvas.drawLine((float) centerX, (float) centerY, (float) centerX,
+                (float) (centerY - joystickRadius), verticalLine);
+        canvas.drawLine((float) (centerX - joystickRadius), (float) centerY,
+                (float) (centerX + joystickRadius), (float) centerY,
+                horizontalLine);
+        canvas.drawLine((float) centerX, (float) (centerY + joystickRadius),
+                (float) centerX, (float) centerY, horizontalLine);
+
+        // painting the move button
+        canvas.drawCircle(xPosition, yPosition, buttonRadius, button);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-            case MotionEvent.ACTION_MOVE:
-                posX = event.getX();
-                posY = event.getY();
-                float abs = (float) Math.sqrt((posX - centerX) * (posX - centerX)
-                        + (posY - centerY) * (posY - centerY));
-                if (abs > radius) {
-                    posX = ((posX - centerX) * radius / abs + centerX);
-                    posY = ((posY - centerY) * radius / abs + centerY);
-                }
-
-                angle = Math.atan2(centerY - posY, centerX - posX);
-
-                power = (100 * Math.sqrt((posX - centerX)
-                        * (posX - centerX) + (posY - centerY)
-                        * (posY - centerY)) / radius);
-
-                invalidate();
-                break;
-            case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_CANCEL:
-                if (!stayPut) {
-                    posX = centerX;
-                    posY = centerY;
-                    angle = 0;
-                    power = 0;
-                    invalidate();
-                }
-                break;
+        xPosition = (int) event.getX();
+        yPosition = (int) event.getY();
+        double abs = Math.sqrt((xPosition - centerX) * (xPosition - centerX)
+                + (yPosition - centerY) * (yPosition - centerY));
+        if (abs > joystickRadius) {
+            xPosition = (int) ((xPosition - centerX) * joystickRadius / abs + centerX);
+            yPosition = (int) ((yPosition - centerY) * joystickRadius / abs + centerY);
         }
-
-        if (listener != null) {
-            listener.onMove(this, angle, power);
+        invalidate();
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            xPosition = (int) centerX;
+            yPosition = (int) centerY;
+            thread.interrupt();
+            if (onJoystickMoveListener != null)
+                onJoystickMoveListener.onValueChanged(getAngle(), getPower(),
+                        getDirection());
+        }
+        if (onJoystickMoveListener != null
+                && event.getAction() == MotionEvent.ACTION_DOWN) {
+            if (thread != null && thread.isAlive()) {
+                thread.interrupt();
+            }
+            thread = new Thread(this);
+            thread.start();
+            if (onJoystickMoveListener != null)
+                onJoystickMoveListener.onValueChanged(getAngle(), getPower(),
+                        getDirection());
         }
         return true;
     }
 
-    public void setPadColor(int padColor) {
-        this.padColor = padColor;
+    private int getAngle() {
+        if (xPosition > centerX) {
+            if (yPosition < centerY) {
+                return lastAngle = (int) (Math.atan((centerY - yPosition)
+                        / (xPosition - centerX))
+                        * RAD);
+            } else if (yPosition > centerY) {
+                return lastAngle = (int) (Math.atan((centerY - yPosition)
+                        / (xPosition - centerX)) * RAD) + 360;
+            } else {
+                return lastAngle = 0;
+            }
+        } else if (xPosition < centerX) {
+            if (yPosition < centerY) {
+                return lastAngle = 180 - (int) (Math.atan((centerY - yPosition)
+                        / (centerX - xPosition))
+                        * RAD);
+            } else if (yPosition > centerY) {
+                return lastAngle = (int) (Math.atan((yPosition - centerY)
+                        / (centerX - xPosition)) * RAD) + 180;
+            } else {
+                return lastAngle = 180;
+            }
+        } else {
+            if (yPosition <= centerY) {
+                return lastAngle = 90;
+            } else {
+                return lastAngle = 270;
+            }
+        }
     }
 
-    public void setButtonColor(int buttonColor) {
-        this.buttonColor = buttonColor;
+    private int getPower() {
+        return (int) (100 * Math.sqrt((xPosition - centerX)
+                * (xPosition - centerX) + (yPosition - centerY)
+                * (yPosition - centerY)) / joystickRadius);
     }
 
-    public void setListener(JoyStickListener listener) {
-        this.listener = listener;
+    private int getDirection() {
+        if (lastPower == 0 && lastAngle == 0) {
+            return 0;
+        }
+        int a = 0;
+        if (lastAngle <= 0) {
+            a = (lastAngle * -1) + 90;
+        } else if (lastAngle > 0) {
+            if (lastAngle <= 90) {
+                a = 90 - lastAngle;
+            } else {
+                a = 360 - (lastAngle - 90);
+            }
+        }
+
+        int direction = (int) (((a + 22) / 45) + 1);
+
+        if (direction > 8) {
+            direction = 1;
+        }
+        return direction;
     }
 
-    public double getPower() {
-        return power;
+    public void setOnJoystickMoveListener(OnJoystickMoveListener listener,
+                                          long repeatInterval) {
+        this.onJoystickMoveListener = listener;
+        this.loopInterval = repeatInterval;
     }
 
-    public double getAngle() {
-        return angle;
+    public interface OnJoystickMoveListener {
+        public void onValueChanged(int angle, int power, int direction);
     }
 
-    public double getAngleDegrees() {
-        return Math.toDegrees(angle);
-    }
-
-    public void enableStayPut(boolean enable) {
-        this.stayPut = enable;
-    }
-
-    //size of button is a percentage of the minimum(width, height)
-    //percentage must be between 25 - 50
-    public void setButtonRadiusScale(int scale) {
-        percentage = scale;
-        if (percentage > 50) percentage = 50;
-        if (percentage < 25) percentage = 25;
-    }
-
-    public void setPadBackground(int resId) {
-        this.padBGBitmap = BitmapFactory.decodeResource(getResources(), resId);
-    }
-
-    public void setButtonDrawable(int resId) {
-        this.buttonBitmap = BitmapFactory.decodeResource(getResources(), resId);
+    @Override
+    public void run() {
+        while (!Thread.interrupted()) {
+            post(new Runnable() {
+                public void run() {
+                    if (onJoystickMoveListener != null)
+                        onJoystickMoveListener.onValueChanged(getAngle(),
+                                getPower(), getDirection());
+                }
+            });
+            try {
+                Thread.sleep(loopInterval);
+            } catch (InterruptedException e) {
+                break;
+            }
+        }
     }
 }
