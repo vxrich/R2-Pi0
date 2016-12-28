@@ -23,7 +23,7 @@ import static android.support.v4.app.ActivityCompat.startActivityForResult;
 
 public class MainActivity extends AppCompatActivity{
 
-    BluetoothConnection bluetoothConn = new BluetoothConnection();
+    BluetoothConnection bluetoothConn;
 
 
     private static final int REQUEST_ENABLE_BT = 0;
@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity{
 
         final Context context = getApplicationContext();
         final Activity activity = this;
+
+        bluetoothConn = new BluetoothConnection(context, activity);
         //WiFiConnection.connection(context);
         setContentView(R.layout.activity_main);
 
@@ -96,7 +98,7 @@ public class MainActivity extends AppCompatActivity{
             bluetooth.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
                     //Apre l'activity con la lista dei device associati e trovati
-                    bluetoothConn.connection(context, activity);
+                    bluetoothConn.connection();
                 }
             });
     }
