@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Context context = getApplicationContext();
+        final Context context = getApplicationContext();
+        final Activity activity = getActivity();
         //WiFiConnection.connection(context);
         setContentView(R.layout.activity_main);
 
@@ -95,34 +96,12 @@ public class MainActivity extends AppCompatActivity{
             bluetooth.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
                     //Apre l'activity con la lista dei device associati e trovati
-                    bluetooth.connection();
+                    bluetooth.connection(context, activity);
                 }
             });
     }
 
-    private void bluetoothConnection(){
 
-        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (mBluetoothAdapter == null) {
-            // Device does not support Bluetooth
-        }
-
-        if (!mBluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        }
-
-        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
-
-        if (pairedDevices.size() > 0) {
-            // There are paired devices. Get the name and address of each paired device.
-            for (BluetoothDevice device : pairedDevices) {
-                String deviceName = device.getName();
-                String deviceHardwareAddress = device.getAddress(); // MAC address
-            }
-        }
-
-    }
 
 
 }
