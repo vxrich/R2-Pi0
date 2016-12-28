@@ -12,7 +12,7 @@
     android:background="@drawable/background"
     tools:context="com.example.juanito.r2_pi0.MainActivity">
 
-    <com.example.juanito.r2_pi0.JoyStick
+    <com.example.juanito.r2_pi0.JoyStickView
         android:id="@+id/joy"
         android:layout_width="200dp"
         android:layout_height="200dp"
