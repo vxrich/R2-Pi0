@@ -39,12 +39,10 @@ public class BluetoothConnection {
     private Context context = null;
     private Activity activity = null;
 
-    private final String BLUE_DEV_NAME = "rpi2";
-
     List<String> s = new ArrayList<String>();
     String blueDevName;
 
-    public void BluetoothConnection(Context context, Activity activity){
+    public BluetoothConnection(Context context, Activity activity){
 
         this.context = context;
         this.activity = activity;
@@ -63,29 +61,39 @@ public class BluetoothConnection {
             this.activity.startActivityForResult(enableBtIntent, 100);
         }
 
-        Set<BluetoothDevice> pairedDevices = blueAdapter.getBondedDevices();
+        final Set<BluetoothDevice> pairedDevices = blueAdapter.getBondedDevices();
+
+        final List<String> devNames = new ArrayList<>();
+
+        for (BluetoothDevice dev : pairedDevices)
+        {
+            devNames.add(dev.getName());
+        }
 
         //StringBuilder sb = new StringBuilder();
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this.activity);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.activity);
 
-            builder.setTitle(R.string.choose)
-                    .setItems(s, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // The 'which' argument contains the index position
-                            // of the selected item
-                            if (pairedDevices.size() > 0) {
-                                // There are paired devices. Get the name and address of each paired device.
-                                for (BluetoothDevice device : pairedDevices) {
-                                    if (device.getName().equals(BLUE_DEV_NAME))
-                                    {
-                                        blueDev = device;
-                                    }
-                                }
-                            }
+        builder.setTitle(R.string.choose);
+        builder.setItems(devNames.toArray(new String[devNames.size()]), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // The 'which' argument contains the index position
+                // of the selected item
 
-                         }
-                    });
+                String devName = devNames.get(which);
+
+                if (pairedDevices.size() > 0) {
+                    // There are paired devices. Get the name and address of each paired device.
+                    for (BluetoothDevice device : pairedDevices) {
+                        if (device.getName().equals(devName)) {
+                            blueDev = device;
+                        }
+                    }
+                }
+
+            }
+        });
+
 
         AlertDialog dialog = builder.create();
 
