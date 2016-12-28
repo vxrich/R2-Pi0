@@ -52,7 +52,7 @@ public class BluetoothConnection {
     }
 
 
-    private void connection(){
+    public void connection(){
 
         blueAdapter = BluetoothAdapter.getDefaultAdapter();
         if (blueAdapter == null) {
@@ -65,13 +65,7 @@ public class BluetoothConnection {
 
         Set<BluetoothDevice> pairedDevices = blueAdapter.getBondedDevices();
 
-        StringBuilder sb = new StringBuilder();
-
-        if (pairedDevices.size() > 0) {
-            for(BluetoothDevice bt : pairedDevices)
-                 s.add(bt.getName());
-
-
+        //StringBuilder sb = new StringBuilder();
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this.activity);
 
@@ -80,22 +74,20 @@ public class BluetoothConnection {
                         public void onClick(DialogInterface dialog, int which) {
                             // The 'which' argument contains the index position
                             // of the selected item
-                            blueDevName = s.get(which);
+                            if (pairedDevices.size() > 0) {
+                                // There are paired devices. Get the name and address of each paired device.
+                                for (BluetoothDevice device : pairedDevices) {
+                                    if (device.getName().equals(BLUE_DEV_NAME))
+                                    {
+                                        blueDev = device;
+                                    }
+                                }
+                            }
+
                          }
                     });
 
         AlertDialog dialog = builder.create();
-
-        }
-
-            // There are paired devices. Get the name and address of each paired device.
-            for (BluetoothDevice device : pairedDevices) {
-                if (device.getName().equals(blueDevName))
-                {
-                    blueDev = device;
-                }
-            }
-
 
         if (blueDev != null)
         {

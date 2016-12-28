@@ -23,7 +23,7 @@ import static android.support.v4.app.ActivityCompat.startActivityForResult;
 
 public class MainActivity extends AppCompatActivity{
 
-    BluetoothConnection bluetooth = new BluetoothConnection();
+    BluetoothConnection bluetoothConn = new BluetoothConnection();
 
 
     private static final int REQUEST_ENABLE_BT = 0;
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
 
         final Context context = getApplicationContext();
-        final Activity activity = getActivity();
+        final Activity activity = this;
         //WiFiConnection.connection(context);
         setContentView(R.layout.activity_main);
 
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-        JoyStick joystick = (JoyStick) findViewById(R.id.joy);
+        JoyStickView joystick = (JoyStickView) findViewById(R.id.joy);
         ImageButton shutdown = (ImageButton) findViewById(R.id.shutdown);
         ImageButton music = (ImageButton) findViewById(R.id.music);
         ImageButton bluetooth = (ImageButton) findViewById(R.id.bluetooth);
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity{
             bluetooth.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
                     //Apre l'activity con la lista dei device associati e trovati
-                    bluetooth.connection(context, activity);
+                    bluetoothConn.connection(context, activity);
                 }
             });
     }
