@@ -20,7 +20,7 @@
         app:padColor="#55ffffff"
         app:buttonColor="#55ff0000"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"/>
 
     <ImageButton
         android:layout_width="70dp"
