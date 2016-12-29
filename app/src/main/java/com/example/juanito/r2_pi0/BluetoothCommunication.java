@@ -29,7 +29,7 @@ import java.util.UUID;
 
 import static android.support.v4.app.ActivityCompat.startActivityForResult;
 
-public class BluetoothConnection {
+public class BluetoothCommunication {
 
     private BluetoothAdapter blueAdapter = null;
     private BluetoothDevice blueDev = null;
@@ -42,7 +42,7 @@ public class BluetoothConnection {
     List<String> s = new ArrayList<String>();
     String blueDevName;
 
-    public BluetoothConnection(Context context, Activity activity){
+    public BluetoothCommunication(Context context, Activity activity){
 
         this.context = context;
         this.activity = activity;
@@ -54,7 +54,7 @@ public class BluetoothConnection {
 
         blueAdapter = BluetoothAdapter.getDefaultAdapter();
         if (blueAdapter == null) {
-            // Device does not support Bluetooth
+            return;// Device does not support Bluetooth
         }
         if (!blueAdapter.isEnabled()) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
@@ -87,7 +87,25 @@ public class BluetoothConnection {
                     for (BluetoothDevice device : pairedDevices) {
                         if (device.getName().equals(devName)) {
                             blueDev = device;
+                            break;
                         }
+                    }
+                }
+
+                if (blueDev != null)
+                {
+
+                    try {
+                        // Get a BluetoothSocket to connect with the given BluetoothDevice.
+                        // MY_UUID is the app's UUID string, also used in the server code.
+                        sock = blueDev.createInsecureRfcommSocketToServiceRecord( UUID.fromString("94f39d29-7d6d-437d-973b-fba39e49d4ee") );
+
+                        sock.connect();
+
+                        blueOut = new PrintWriter (sock.getOutputStream());
+
+                    } catch (IOException e) {
+                        blueFallback();
                     }
                 }
 
@@ -97,23 +115,9 @@ public class BluetoothConnection {
 
         AlertDialog dialog = builder.create();
 
-        if (blueDev != null)
-        {
-            ParcelUuid[] UUIDS = blueDev.getUuids();
+        dialog.show();
 
-            try {
-                // Get a BluetoothSocket to connect with the given BluetoothDevice.
-                // MY_UUID is the app's UUID string, also used in the server code.
-                sock = blueDev.createInsecureRfcommSocketToServiceRecord( UUID.fromString("94f39d29-7d6d-437d-973b-fba39e49d4ee") );
 
-                sock.connect();
-
-                blueOut = new PrintWriter (sock.getOutputStream());
-
-            } catch (IOException e) {
-                blueFallback();
-            }
-        }
 
 
     }
@@ -164,4 +168,38 @@ public class BluetoothConnection {
         }
     }
 
+    private void send (String msg)
+    {
+        if (blueOut != null)
+        {
+            blueOut.print(msg);
+            blueOut.flush();
+        }
+    }
+
+    public void move (int speed)
+    {
+        send(String.format("s %d;", speed));
+    }
+
+
+    public void rotate (int rotation)
+    {
+        send(String.format("r %d;", rotation));
+    }
+
+    public void makeSound ()
+    {
+        makeSound("");
+    }
+
+    public void makeSound (String name)
+    {
+        send(String.format("sound %s;", name));
+    }
+
+    public void shutdown ()
+    {
+        send ("exit;");
+    }
 }

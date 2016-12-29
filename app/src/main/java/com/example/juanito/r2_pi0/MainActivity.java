@@ -2,29 +2,16 @@ package com.example.juanito.r2_pi0;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.media.Image;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
-import android.bluetooth.*;
-import java.net.InetAddress;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ExecutionException;
-
-import static android.support.v4.app.ActivityCompat.startActivityForResult;
 
 public class MainActivity extends AppCompatActivity{
 
-    BluetoothConnection bluetoothConn;
+    private BluetoothCommunication blueComm;
 
+    private JoystickTranslator trans = new JoystickTrigonometricTranslator();
 
     private static final int REQUEST_ENABLE_BT = 0;
 
@@ -35,7 +22,7 @@ public class MainActivity extends AppCompatActivity{
         final Context context = getApplicationContext();
         final Activity activity = this;
 
-        bluetoothConn = new BluetoothConnection(context, activity);
+        blueComm = new BluetoothCommunication(context, activity);
         //WiFiConnection.connection(context);
         setContentView(R.layout.activity_main);
 
@@ -74,31 +61,36 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-        JoyStickView joystick = (JoyStickView) findViewById(R.id.joy);
+        JoyStickView joy = (JoyStickView) findViewById(R.id.joy);
+
+        joy.setOnJoystickMoveListener(new JoyStickView.OnJoystickMoveListener() {
+            @Override
+            public void onValueChanged(int angle, int power, int direction) {
+                blueComm.move(trans.getSpeed(power, angle));
+                blueComm.rotate(trans.getRotation(power, angle));
+            }
+        }, 100);
+
         ImageButton shutdown = (ImageButton) findViewById(R.id.shutdown);
         ImageButton music = (ImageButton) findViewById(R.id.music);
         ImageButton bluetooth = (ImageButton) findViewById(R.id.bluetooth);
 
             shutdown.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                   /* if (mTcpClient != null) {
-                        mTcpClient.sendMessage("shutdown");
-                    }*/
+                   blueComm.shutdown();
                 }
             });
 
             music.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                   /* if (mTcpClient != null) {
-                        mTcpClient.sendMessage("music");
-                    }*/
+                   blueComm.makeSound();
                 }
             });
 
             bluetooth.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
                     //Apre l'activity con la lista dei device associati e trovati
-                    bluetoothConn.connection();
+                    blueComm.connection();
                 }
             });
     }
