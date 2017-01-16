@@ -197,9 +197,11 @@ public class BluetoothCommunication {
         send ("exit;");
     }
 
-    public void moveForward (){ send(String.format("s 60;"));};
+    public void follow () { send(String.format("follow"));}
 
-    public void rotationZero (){send(String.format("r 0;"));}
+    public void reach() { send(String.format("reach"));}
+
+    public void turn () { send(String.format("turn"));}
 
     public void shutup (){ send(String.format("shutup"));}
 }

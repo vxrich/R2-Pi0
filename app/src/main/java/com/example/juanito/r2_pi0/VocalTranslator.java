@@ -13,7 +13,7 @@ public class VocalTranslator {
         this.blue = blue;
     }
 
-    private String comandi[] = {"zitto", "shut up", "destra", "sinistra", "left", "right", "vieni", "come", "seguimi", "follow", "gira a destra", "gira a sinistra", "turn left", "turn right" };
+    private String comandi[] = {"raggiungimi", "reach me", "zitto", "shut up", "destra", "sinistra", "left", "right", "vieni", "come", "seguimi", "follow", "gira a destra", "gira a sinistra", "turn left", "turn right" };
 
     public void translate (String text)
     {
@@ -28,8 +28,14 @@ public class VocalTranslator {
                     case "seguimi":
                     case "follow":
                     {
-                        blue.moveForward();
-                        blue.rotationZero();
+                        blue.follow();
+                        break;
+                    }
+
+                    case "reach me":
+                    case "raggiungimi":
+                    {
+                        blue.reach();
                         break;
                     }
 
