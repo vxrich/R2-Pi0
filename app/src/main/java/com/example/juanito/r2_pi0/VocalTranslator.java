@@ -49,8 +49,8 @@ public class VocalTranslator {
                         break;
                     }
 
-                    case "zitto":
                     case "shut up":
+                    case "zitto":
                     {
                         blue.shutup();
                         break;
