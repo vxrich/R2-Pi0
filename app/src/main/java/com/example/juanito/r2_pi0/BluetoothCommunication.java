@@ -1,24 +1,20 @@
 package com.example.juanito.r2_pi0;
 
 /**
- * Created by juanito on 22/12/16.
+ * Created by Riccardo on 22/12/16.
  */
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.bluetooth.*;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.ParcelUuid;
-import android.support.v4.app.ActivityCompat;
-import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -26,8 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-
-import static android.support.v4.app.ActivityCompat.startActivityForResult;
 
 public class BluetoothCommunication {
 
@@ -202,4 +196,10 @@ public class BluetoothCommunication {
     {
         send ("exit;");
     }
+
+    public void moveForward (){ send(String.format("s 60;"));};
+
+    public void rotationZero (){send(String.format("r 0;"));}
+
+    public void shutup (){ send(String.format("shutup"));}
 }

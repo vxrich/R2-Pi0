@@ -5,4 +5,62 @@ package com.example.juanito.r2_pi0;
  */
 
 public class VocalTranslator {
+
+    private BluetoothCommunication blue;
+
+    public VocalTranslator (BluetoothCommunication blue)
+    {
+        this.blue = blue;
+    }
+
+    private String comandi[] = {"zitto", "shut up", "destra", "sinistra", "left", "right", "vieni", "come", "seguimi", "follow", "gira a destra", "gira a sinistra", "turn left", "turn right" };
+
+    public void translate (String text)
+    {
+        for(int i=0; i < comandi.length; i++)
+        {
+            if(text.toLowerCase().contains(comandi[i]))
+            {
+                switch(comandi[i])
+                {
+                    case "vieni":
+                    case "come":
+                    case "seguimi":
+                    case "follow":
+                    {
+                        blue.moveForward();
+                        blue.rotationZero();
+                        break;
+                    }
+
+                    case "destra":
+                    case "right":
+                    case "turn right":
+                    {
+                        blue.rotate(30);
+                        break;
+                    }
+
+                    case "sinistra":
+                    case "left":
+                    case "turn left":
+                    {
+                        blue.rotate(-30);
+                        break;
+                    }
+
+                    case "zitto":
+                    case "shut up":
+                    {
+                        blue.shutup();
+                        break;
+                    }
+
+                    default: blue.makeSound("errore");  // Inserire il nome del suono di errore
+                }
+            }
+
+        }
+    }
+
 }
