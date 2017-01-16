@@ -197,11 +197,11 @@ public class BluetoothCommunication {
         send ("exit;");
     }
 
-    public void follow () { send(String.format("follow"));}
+    public void follow () { send("follow;");}
 
-    public void reach() { send(String.format("reach"));}
+    public void reach() { send("reach;");}
 
-    public void turn () { send(String.format("turn"));}
+    public void turn() { send("turn;");}
 
-    public void shutup (){ send(String.format("shutup"));}
+    public void shutup (){ send("shutup;");}
 }
