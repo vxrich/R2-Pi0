@@ -1,0 +1,34 @@
+[
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/stop.png",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/generated/res/pngs/debug/drawable-ldpi/stop.png"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/vocal_control.png",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/generated/res/pngs/debug/drawable-ldpi/vocal_control.png"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/arrow_right.png",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/generated/res/pngs/debug/drawable-ldpi/arrow_right.png"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/arrow_left.png",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/generated/res/pngs/debug/drawable-ldpi/arrow_left.png"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/shutdown.png",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/generated/res/pngs/debug/drawable-ldpi/shutdown.png"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/bluetooth.png",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/generated/res/pngs/debug/drawable-ldpi/bluetooth.png"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/music.png",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/generated/res/pngs/debug/drawable-ldpi/music.png"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/arrow_up.png",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/generated/res/pngs/debug/drawable-ldpi/arrow_up.png"
+    }
+]

@@ -8,6 +8,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+// Classe che permette di creare l'oggetto view
+// Classe di terze parti: https://github.com/zerokol/JoystickView/
+// Sono stati modificati i colori per renderla meglio adattabile alla nostra applicazione
 public class JoyStickView extends View implements Runnable {
     // Constants
     private final double RAD = 57.2957795;

@@ -4,6 +4,7 @@ package com.example.juanito.r2_pi0;
  * Created by davide on 29/12/16.
  */
 
+// Classe che ritorna velocita' e rotazione dell'elemento JoyStick
 public class JoystickTrigonometricTranslator implements JoystickTranslator {
 
     private final static double RAD = 57.2957795;

@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/drawable-anydpi-v21/shutdown.xml",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/generated/res/pngs/debug/drawable-anydpi-v21/shutdown.xml"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/drawable-anydpi-v21/stop.xml",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/generated/res/pngs/debug/drawable-anydpi-v21/stop.xml"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/drawable-anydpi-v21/ic_bluetooth_audio_black_24dp.xml",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/generated/res/pngs/debug/drawable-anydpi-v21/ic_bluetooth_audio_black_24dp.xml"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/drawable-anydpi-v21/vocal_control.xml",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/generated/res/pngs/debug/drawable-anydpi-v21/vocal_control.xml"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/drawable-anydpi-v21/arrow_up.xml",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/generated/res/pngs/debug/drawable-anydpi-v21/arrow_up.xml"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/drawable-anydpi-v21/bluetooth.xml",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/generated/res/pngs/debug/drawable-anydpi-v21/bluetooth.xml"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/drawable-anydpi-v21/arrow_left.xml",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/generated/res/pngs/debug/drawable-anydpi-v21/arrow_left.xml"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/drawable-anydpi-v21/music.xml",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/generated/res/pngs/debug/drawable-anydpi-v21/music.xml"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/drawable-anydpi-v21/arrow_right.xml",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/generated/res/pngs/debug/drawable-anydpi-v21/arrow_right.xml"
+    }
+]

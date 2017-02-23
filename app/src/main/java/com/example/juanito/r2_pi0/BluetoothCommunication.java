@@ -23,13 +23,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+// Classe per la gestione della connessione e invio dei messaggi via Bluetooth
 public class BluetoothCommunication {
 
+    // Creazione degli oggetti Bluetooth necessari alla connessione
     private BluetoothAdapter blueAdapter = null;
     private BluetoothDevice blueDev = null;
     private BluetoothSocket sock = null;
     private PrintWriter blueOut = null;
 
+    // Creazione dei content e activity necessari per i messaggi Toast
     private Context context = null;
     private Activity activity = null;
 
@@ -43,7 +46,7 @@ public class BluetoothCommunication {
 
     }
 
-
+    // Metodo con il compito di instaurare la connessione con il dispositivo
     public void connection(){
 
         blueAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -71,13 +74,12 @@ public class BluetoothCommunication {
         builder.setTitle(R.string.choose);
         builder.setItems(devNames.toArray(new String[devNames.size()]), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                // The 'which' argument contains the index position
-                // of the selected item
 
+                // L'argomento 'which' contiene l'indice della posizione dell'elemento selezionato
                 String devName = devNames.get(which);
 
                 if (pairedDevices.size() > 0) {
-                    // There are paired devices. Get the name and address of each paired device.
+                    // Nome e indirizzo dei device associati
                     for (BluetoothDevice device : pairedDevices) {
                         if (device.getName().equals(devName)) {
                             blueDev = device;
@@ -90,8 +92,7 @@ public class BluetoothCommunication {
                 {
 
                     try {
-                        // Get a BluetoothSocket to connect with the given BluetoothDevice.
-                        // MY_UUID is the app's UUID string, also used in the server code.
+                        // Istanzia un BluetoothSocket per connettersi al BluetoothDevice selezionato
                         sock = blueDev.createInsecureRfcommSocketToServiceRecord( UUID.fromString("94f39d29-7d6d-437d-973b-fba39e49d4ee") );
 
                         sock.connect();
@@ -116,6 +117,7 @@ public class BluetoothCommunication {
 
     }
 
+    // Metodo per resettare il Bluetooth
     private void resetBlue ()
     {
         blueAdapter.disable();
@@ -137,6 +139,7 @@ public class BluetoothCommunication {
             }
     }
 
+    // Metodo per gestire la caduta della connessione Bluetooth
     private void blueFallback ()
     {
         Toast.makeText(this.context.getApplicationContext(), "WARNING: BLUETOOTH FALLBACK!", Toast.LENGTH_LONG).show();
@@ -162,6 +165,7 @@ public class BluetoothCommunication {
         }
     }
 
+    // Metodo base per l'invio di Stringhe
     private void send (String msg)
     {
         if (blueOut != null)
@@ -171,6 +175,7 @@ public class BluetoothCommunication {
         }
     }
 
+    // Metodi che inviano le stringhe riguardandi le varie interazioni
     public void move (int speed)
     {
         send(String.format("s %d;", speed));

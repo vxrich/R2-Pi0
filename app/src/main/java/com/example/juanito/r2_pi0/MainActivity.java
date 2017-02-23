@@ -35,45 +35,16 @@ public class MainActivity extends AppCompatActivity{
 
         blueComm = new BluetoothCommunication(context, activity);
         translator  = new VocalTranslator(blueComm);
-        //WiFiConnection.connection(context);
+
         setContentView(R.layout.activity_main);
 
-       /* AsyncTask<Void, Void, List<InetAddress>> at = (new DiscoveryClient(5000, 5001).execute());
-
-        InetAddress addr = null;
-
-        try {
-            List<InetAddress> lista_at = at.get();
-            if (lista_at.size() > 0)
-            {
-                addr = lista_at.get(0);
-            }
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
-        TcpClient tcpClient = null;
-
-
-        if (addr!= null)
-        {
-            tcpClient = new TcpClient(addr.toString());
-        }
-        else
-        {
-            Toast toast = Toast.makeText(getApplicationContext(), "Impossibile connettersi", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-
-        final TcpClient mTcpClient = tcpClient;
-        */
-
-
+        // Creazione dei pulsanti e elementi visivi
 
         JoyStickView joy = (JoyStickView) findViewById(R.id.joy);
+        ImageButton shutdown = (ImageButton) findViewById(R.id.shutdown);
+        ImageButton music = (ImageButton) findViewById(R.id.music);
+        ImageButton bluetooth = (ImageButton) findViewById(R.id.bluetooth);
+        ImageButton vocal_control = (ImageButton) findViewById(R.id.vocal_control);
 
         joy.setOnJoystickMoveListener(new JoyStickView.OnJoystickMoveListener() {
             @Override
@@ -83,31 +54,27 @@ public class MainActivity extends AppCompatActivity{
             }
         }, 100);
 
-        ImageButton shutdown = (ImageButton) findViewById(R.id.shutdown);
-        ImageButton music = (ImageButton) findViewById(R.id.music);
-        ImageButton bluetooth = (ImageButton) findViewById(R.id.bluetooth);
-        ImageButton vocal_control = (ImageButton) findViewById(R.id.vocal_control);
 
-            shutdown.setOnClickListener(new View.OnClickListener() {
+        shutdown.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                    blueComm.shutdown();
                 }
             });
 
-            music.setOnClickListener(new View.OnClickListener() {
+        music.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                    blueComm.makeSound();
                 }
             });
 
-            bluetooth.setOnClickListener(new View.OnClickListener(){
+        bluetooth.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
                     //Apre l'activity con la lista dei device associati e trovati
                     blueComm.connection();
                 }
             });
 
-            vocal_control.setOnClickListener(new View.OnClickListener()
+        vocal_control.setOnClickListener(new View.OnClickListener()
             {
                 public void onClick(View v)
                 {
@@ -118,6 +85,7 @@ public class MainActivity extends AppCompatActivity{
             });
     }
 
+    //Metodo per l'apertura degli intent dei comandi vocali
     private void startSpeechToText()
     {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -135,6 +103,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    //Metodo per il riconoscimento del parlato e conversione in stringa
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

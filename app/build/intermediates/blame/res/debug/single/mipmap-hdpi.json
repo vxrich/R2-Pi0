@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/mipmap-hdpi/icon.png",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/src/main/res/mipmap-hdpi/icon.png"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/mipmap-hdpi/ic_launcher.png",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    }
+]

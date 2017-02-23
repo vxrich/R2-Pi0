@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background2"
+    android:orientation="vertical"
+    tools:context="com.example.juanito.r2_pi0.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/shutdown"
+            android:id="@+id/shutdown"
+            android:background="@drawable/button_back"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal|center_vertical"
+            android:layout_weight="0.3">
+
+
+            <ImageButton
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/vocal_control"
+                android:id="@+id/vocal_control"
+                android:background="@drawable/button_back"
+                android:layout_margin="7dp"/>
+
+            <ImageButton
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/music"
+                android:id="@+id/music"
+                android:background="@drawable/button_back"
+                android:layout_margin="7dp"/>
+
+            <ImageButton
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_bluetooth_audio_black_24dp"
+                android:id="@+id/bluetooth"
+                android:background="@drawable/button_back"
+                android:layout_margin="7dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="right"
+            android:layout_weight="0.3">
+            <com.example.juanito.r2_pi0.JoyStickView
+                android:id="@+id/joy"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:padColor="#55ffffff"
+                app:buttonColor="#55ff0000" />
+            </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

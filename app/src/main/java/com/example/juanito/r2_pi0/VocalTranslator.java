@@ -4,6 +4,7 @@ package com.example.juanito.r2_pi0;
  * Created by Riccardo on 14/01/17.
  */
 
+// Classe per la ricerca delle parole chiave nella stringa prodotta dal riconoscimento vocale
 public class VocalTranslator {
 
     private BluetoothCommunication blue;
@@ -13,6 +14,7 @@ public class VocalTranslator {
         this.blue = blue;
     }
 
+    // Stringhe delle parole che vengono cercate
     private String comandi[] = {"raggiungimi", "reach me", "zitto", "shut up", "destra", "sinistra", "left", "right", "vieni", "come", "seguimi", "follow", "gira a destra", "gira a sinistra", "turn left", "turn right" };
 
     public void translate (String text)
@@ -62,6 +64,7 @@ public class VocalTranslator {
                         break;
                     }
 
+                    // Se non vengono trovate parole viene inviato un comando per far suonare da errore il robot
                     default: blue.makeSound("errore");  // Inserire il nome del suono di errore
                 }
             }
