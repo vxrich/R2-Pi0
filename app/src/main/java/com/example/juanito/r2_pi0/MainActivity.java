@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity{
 
     private BluetoothCommunication blueComm;
 
-    private VocalTranslator translator = new VocalTranslator(blueComm);
+    private VocalTranslator translator;
 
     private JoystickTranslator trans = new JoystickTrigonometricTranslator();
 
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity{
         final Activity activity = this;
 
         blueComm = new BluetoothCommunication(context, activity);
+        translator  = new VocalTranslator(blueComm);
         //WiFiConnection.connection(context);
         setContentView(R.layout.activity_main);
 
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity{
                 {
 
                     startSpeechToText();
-                    translator.translate(message);
+
                 }
             });
     }
@@ -143,6 +144,7 @@ public class MainActivity extends AppCompatActivity{
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     message = result.get(0);
+                    translator.translate(message);
                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 }
                 break;
