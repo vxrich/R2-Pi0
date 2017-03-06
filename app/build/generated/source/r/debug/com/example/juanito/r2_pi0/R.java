@@ -1639,7 +1639,7 @@ containing a value of this type.
         public static final int arrow_right=0x7f020046;
         public static final int arrow_up=0x7f020047;
         public static final int background=0x7f020048;
-        public static final int background2=0x7f020049;
+        public static final int background =0x7f020049;
         public static final int bluetooth=0x7f02004a;
         public static final int button_back=0x7f02004b;
         public static final int download=0x7f02004c;

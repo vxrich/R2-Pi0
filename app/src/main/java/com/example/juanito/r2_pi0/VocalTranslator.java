@@ -65,7 +65,7 @@ public class VocalTranslator {
                     }
 
                     // Se non vengono trovate parole viene inviato un comando per far suonare da errore il robot
-                    default: blue.makeSound("errore");  // Inserire il nome del suono di errore
+                    default: blue.makeSound("errore");
                 }
             }
 
