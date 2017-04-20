@@ -209,4 +209,6 @@ public class BluetoothCommunication {
     public void turn() { send("turn;");}
 
     public void shutup (){ send("shutup;");}
+
+    public void project (){ send("project;");}
 }

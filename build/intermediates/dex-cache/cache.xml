@@ -3,39 +3,39 @@
 
     <item
         is-multidex="false"
-        jar="/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
+        jar="/home/vxrich/.android/build-cache/072ef97109a5df8a591a7e7a55f2f66b20192d26/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.2"
+        revision="25.0.0"
         sha1="5c5699834e9722f1c288fea2de82725d078ba127">
-        <dex dex="/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.1.1_e254e5957dbd951714b679cb2619be039d61d020.jar" />
+        <dex dex="/home/vxrich/AndroidStudioProjects/R2-Pi0/app/build/intermediates/pre-dexed/debug/classes_6e5c55a19053b56ce34b4defb93f49e0b71a8277.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar"
+        jar="/home/vxrich/.android/build-cache/3875f3b639eded96db393566eb25b0cbfd287a6e/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.2"
+        revision="25.0.0"
         sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
-        <dex dex="/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.1.1_f06efdc6d282ce73b97bcfb674eddc7f0a9ef6fb.jar" />
+        <dex dex="/home/vxrich/AndroidStudioProjects/R2-Pi0/app/build/intermediates/pre-dexed/debug/classes_8bf25f84ee21bdd34c0f20c5cd8a65b9f5da4eb5.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/juanito/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
+        jar="/home/vxrich/.android/build-cache/3875f3b639eded96db393566eb25b0cbfd287a6e/output/jars/libs/internal_impl-23.1.1.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.2"
-        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
-        <dex dex="/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1_98b1a568998a72894dd78f16d2d69cc38654471e.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.2"
+        revision="25.0.0"
         sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
-        <dex dex="/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1_8f8fe814a4d9f3273397c0e1533258f28f355926.jar" />
+        <dex dex="/home/vxrich/AndroidStudioProjects/R2-Pi0/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1_d354612a9ceee4559ed15f22b953c54be32580c5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/vxrich/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="/home/vxrich/AndroidStudioProjects/R2-Pi0/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1_eb79c504f29d2c89611f0b23758162ee9c437dd5.jar" />
     </item>
 
 </items>

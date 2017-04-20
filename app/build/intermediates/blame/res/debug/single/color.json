@@ -1,15 +1,63 @@
 [
     {
-        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_primary_text_material_light.xml",
-        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/color/abc_primary_text_material_light.xml"
-    },
-    {
         "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/switch_thumb_material_light.xml",
         "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/color/switch_thumb_material_light.xml"
     },
     {
+        "merged": "/home/vxrich/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_search_url_text.xml",
+        "source": "/home/vxrich/.android/build-cache/072ef97109a5df8a591a7e7a55f2f66b20192d26/output/res/color/abc_search_url_text.xml"
+    },
+    {
+        "merged": "/home/vxrich/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/switch_thumb_material_light.xml",
+        "source": "/home/vxrich/.android/build-cache/072ef97109a5df8a591a7e7a55f2f66b20192d26/output/res/color/switch_thumb_material_light.xml"
+    },
+    {
+        "merged": "/home/vxrich/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_secondary_text_material_dark.xml",
+        "source": "/home/vxrich/.android/build-cache/072ef97109a5df8a591a7e7a55f2f66b20192d26/output/res/color/abc_secondary_text_material_dark.xml"
+    },
+    {
+        "merged": "/home/vxrich/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_primary_text_disable_only_material_light.xml",
+        "source": "/home/vxrich/.android/build-cache/072ef97109a5df8a591a7e7a55f2f66b20192d26/output/res/color/abc_primary_text_disable_only_material_light.xml"
+    },
+    {
+        "merged": "/home/vxrich/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_primary_text_material_dark.xml",
+        "source": "/home/vxrich/.android/build-cache/072ef97109a5df8a591a7e7a55f2f66b20192d26/output/res/color/abc_primary_text_material_dark.xml"
+    },
+    {
+        "merged": "/home/vxrich/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_secondary_text_material_light.xml",
+        "source": "/home/vxrich/.android/build-cache/072ef97109a5df8a591a7e7a55f2f66b20192d26/output/res/color/abc_secondary_text_material_light.xml"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_tint_switch_track.xml",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/color/abc_tint_switch_track.xml"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_tint_default.xml",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/color/abc_tint_default.xml"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/switch_thumb_material_dark.xml",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/color/switch_thumb_material_dark.xml"
+    },
+    {
+        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_primary_text_material_light.xml",
+        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/color/abc_primary_text_material_light.xml"
+    },
+    {
+        "merged": "/home/vxrich/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_primary_text_material_light.xml",
+        "source": "/home/vxrich/.android/build-cache/072ef97109a5df8a591a7e7a55f2f66b20192d26/output/res/color/abc_primary_text_material_light.xml"
+    },
+    {
         "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_tint_btn_checkable.xml",
         "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/color/abc_tint_btn_checkable.xml"
+    },
+    {
+        "merged": "/home/vxrich/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_primary_text_disable_only_material_dark.xml",
+        "source": "/home/vxrich/.android/build-cache/072ef97109a5df8a591a7e7a55f2f66b20192d26/output/res/color/abc_primary_text_disable_only_material_dark.xml"
+    },
+    {
+        "merged": "/home/vxrich/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/switch_thumb_material_dark.xml",
+        "source": "/home/vxrich/.android/build-cache/072ef97109a5df8a591a7e7a55f2f66b20192d26/output/res/color/switch_thumb_material_dark.xml"
     },
     {
         "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_primary_text_material_dark.xml",
@@ -32,10 +80,6 @@
         "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/color/abc_btn_colored_borderless_text_material.xml"
     },
     {
-        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_tint_switch_track.xml",
-        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/color/abc_tint_switch_track.xml"
-    },
-    {
         "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_primary_text_disable_only_material_light.xml",
         "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/color/abc_primary_text_disable_only_material_light.xml"
     },
@@ -48,20 +92,12 @@
         "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/color/abc_tint_switch_thumb.xml"
     },
     {
-        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_tint_default.xml",
-        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/color/abc_tint_default.xml"
-    },
-    {
         "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_secondary_text_material_light.xml",
         "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/color/abc_secondary_text_material_light.xml"
     },
     {
         "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_secondary_text_material_dark.xml",
         "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/color/abc_secondary_text_material_dark.xml"
-    },
-    {
-        "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/switch_thumb_material_dark.xml",
-        "source": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/color/switch_thumb_material_dark.xml"
     },
     {
         "merged": "/home/juanito/AndroidStudioProjects/R2-Pi0/app/build/intermediates/res/merged/debug/color/abc_tint_spinner.xml",
